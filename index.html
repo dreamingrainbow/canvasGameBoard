@@ -113,9 +113,9 @@
                     movePlayer(direction)
                     {
                          if(this.player === undefined) drawPlayer();
-                         this.canvasContext.fillStyle = this.bc;
+                         this.canvasContext.strokeStyle = this.bc;
                          this.drawSquare( this.player.position.x, this.player.position.y, 10);
-                         this.canvasContext.fillStyle = this.fc;
+                         this.canvasContext.strokeStyle = this.fc;
                          switch(direction) {
                               case 'up':
                                    this.player.position.y = this.player.position.y - 1;
