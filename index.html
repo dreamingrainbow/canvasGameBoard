@@ -74,6 +74,26 @@
                            this.canvas = document.getElementById(this.canvasId);
                          }          
                          this.canvasContext = this.canvas.getContext("2d");
+                         document.onkeydown = checkKey;
+                         checkKey(e) => {
+                                  e = e || window.event;
+                                  if (e.keyCode == '38') {
+                                       // up arrow
+                                       gameInstance.movePlayer('up');
+                                  }
+                                  else if (e.keyCode == '40') {
+                                  // down arrow
+                                       gameInstance.movePlayer('down');
+                                  }
+                                  else if (e.keyCode == '37') {
+                                  // left arrow
+                                       gameInstance.movePlayer('left');
+                                  }
+                                  else if (e.keyCode == '39') {
+                                  // right arrow
+                                       gameInstance.movePlayer('right');
+                                  }
+                         };                         
                     }
                     setup() {
                          if(this.user === undefined) {
@@ -152,6 +172,8 @@
                }
                let gameInstance = new Game([{x:0,y:0,z:0},{id:'canvas',w:400,h:400,bc:'#fff',fc:'#000'}]);
                gameInstance.run();
+               
+               
           </script>
      </body>
 </html>
