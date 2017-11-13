@@ -74,27 +74,27 @@
                            this.canvas = document.getElementById(this.canvasId);
                          }          
                          this.canvasContext = this.canvas.getContext("2d");
-                         document.onkeydown = checkKey;
-                         checkKey(e) => {
-                                  e = e || window.event;
-                                  if (e.keyCode == '38') {
-                                       // up arrow
-                                       gameInstance.movePlayer('up');
-                                  }
-                                  else if (e.keyCode == '40') {
-                                  // down arrow
-                                       gameInstance.movePlayer('down');
-                                  }
-                                  else if (e.keyCode == '37') {
-                                  // left arrow
-                                       gameInstance.movePlayer('left');
-                                  }
-                                  else if (e.keyCode == '39') {
-                                  // right arrow
-                                       gameInstance.movePlayer('right');
-                                  }
                          };                         
                     }
+checkKey(e) {
+    e = e || window.event;
+    if (e.keyCode == '38') {
+    // up arrow
+        gameInstance.movePlayer('up');
+    }
+    else if (e.keyCode == '40') {
+    // down arrow
+        gameInstance.movePlayer('down');
+    }
+    else if (e.keyCode == '37') {
+    // left arrow
+        gameInstance.movePlayer('left');
+    }
+    else if (e.keyCode == '39') {
+    // right arrow
+        gameInstance.movePlayer('right');
+    }
+}        
                     setup() {
                          if(this.user === undefined) {
                               
