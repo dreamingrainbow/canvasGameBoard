@@ -121,7 +121,7 @@
                     verticleLine(sx,sy, length) {
                          this.canvasContext.beginPath();
                          this.moveTo(sx,sy);
-                         this.canvasContext.lineTo(sx, sy + length);
+                         this.canvasContext.lineTo(sx, sy + length);  
                          this.canvasContext.stroke();
                     }
                     drawPlayer( ) {          
@@ -131,26 +131,33 @@
                          this.drawSquare( this.player.position.x, this.player.position.y, 10);
                     }
                     movePlayer(direction)
-                    {
-                         if(this.player === undefined) drawPlayer();
-                         this.canvasContext.strokeStyle = this.bc;
-                         this.drawSquare( this.player.position.x, this.player.position.y, 10);
-                         this.canvasContext.strokeStyle = this.fc;
-                         switch(direction) {
-                              case 'up':
-                                   this.player.position.y = this.player.position.y - 1;
-                                   break;
-                              case 'down':
-                                   this.player.position.y = this.player.position.y + 1;
-                                   break;
-                              case 'left':
-                                   this.player.position.x = this.player.position.x - 1;
-                                   break;
-                              case 'right':
-                                   this.player.position.x = this.player.position.x + 1;
-                                   break;                    
-                         }
-                         this.drawSquare( this.player.position.x, this.player.position.y, 10);
+                    {     
+                      //this.playSound();                   
+                      
+                      if(this.player === undefined) drawPlayer();                      
+                      this.canvasContext.clearRect(this.player.position.x - 1, this.player.position.y - 11, 12, 12);
+                      this.canvasContext.fillStyle = '#fff';
+                      this.canvasContext.fillRect(this.player.position.x - 1, this.player.position.y - 11, 12, 12);                        
+                      switch(direction) {
+                        case 'up':
+                          if (this.player.position.y > 12) this.player.position.y = this.player.position.y - 1;
+                          if (this.player.position.y === 12 ) this.playSound();
+                        break;
+                        case 'down': 
+                          if (this.player.position.y === (this.canvas.height - 7) ) this.playSound();
+                          if (this.player.position.y < (this.canvas.height - 7)) this.player.position.y = this.player.position.y + 1;
+                        break;
+                        case 'left':
+                          if (this.player.position.x === 5) this.playSound();
+                          if (this.player.position.x > 5) this.player.position.x = this.player.position.x - 1;
+                        break;
+                        case 'right':
+                          if (this.player.position.x === (this.canvas.width - 14)) this.playSound();
+                          if (this.player.position.x < (this.canvas.width - 14)) this.player.position.x = this.player.position.x + 1;
+                        break;                    
+                      }
+                      console.log(this.player.position.x,this.player.position.y);
+                      this.drawSquare( this.player.position.x, this.player.position.y, 10);
                     }
                     run() {
                          this.drawScreen();
@@ -169,10 +176,15 @@
                          this.horizontalLine(x, y - length, length);
                          this.verticleLine(x + length, y - length, length);
                     }
+                    playSound() {
+                         var sound = document.getElementById("audio");
+                         sound.play()
+                    }
                }
                let gameInstance = new Game([{x:0,y:0,z:0},{id:'canvas',w:400,h:400,bc:'#fff',fc:'#000'}]);
                gameInstance.run();
                
           </script>
+          <audio id="audio" src="http://www.soundjay.com/button/beep-07.wav" autostart="false" ></audio>
      </body>
 </html>
